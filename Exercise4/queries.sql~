@@ -1,0 +1,6 @@
+vin@vin-HP-ProBook-4530s:~/Documents/tasks/SQL/Exercise4$ mysqldump -u root -p DVDRentals > 09112017backup.sql
+Enter password: 
+-------
+vin@vin-HP-ProBook-4530s:~/Documents/tasks/SQL/Exercise4$ mysql -u root -p restored < 09112017backup.sql
+Enter password: 
+---------
