@@ -134,7 +134,7 @@ mysql> SELECT Location
 ----------------------------------
 3. For each location, number of people who can eat there.
 mysql> SELECT Location, COUNT(DISTINCT Name)
-    -> FROM SANDWICHES AS s, TASTES as t
+    -> FROM SANDWICHES AS s, TASTES AS t
     -> WHERE s.Filling = t.Filling
     -> GROUP BY Location;
 +------------+----------------------+
