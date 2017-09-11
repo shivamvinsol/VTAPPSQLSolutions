@@ -109,17 +109,16 @@ mysql> SELECT NAME, SUM(Commissions.COMMISSION_AMOUNT) AS 'TOTAL COMMISSION'
 
 Q2. Find employee with 4th Highest salary from employee table.
 ANSWER-
-mysql> SELECT NAME, SALARY, DEPARTMENT_ID
+mysql> SELECT NAME
     -> FROM Employees
     -> ORDER BY SALARY DESC
     -> LIMIT 3,1;
-+--------------+--------+---------------+
-| NAME         | SALARY | DEPARTMENT_ID |
-+--------------+--------+---------------+
-| Rahul Dravid | 700000 |             1 |
-+--------------+--------+---------------+
++--------------+
+| NAME         |
++--------------+
+| Rahul Dravid |
++--------------+
 1 row in set (0.00 sec)
-
 ---------------------------------------
 
 Q3. Find department that is giving highest commission.
