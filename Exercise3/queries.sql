@@ -7,17 +7,6 @@ mysql> CREATE TABLE Users
 
 Query OK, 0 rows affected (0.67 sec)
 
-mysql> ALTER TABLE Articles
-    -> ADD FOREIGN KEY(USER_ID) REFERENCES Users(ID)
-    -> ON UPDATE CASCADE
-    -> ON DELETE CASCADE;
-Query OK, 0 rows affected (0.64 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
-mysql> ALTER TABLE Articles ADD FOREIGN KEY(Category_ID) REFERENCES Categories(ID) ON UPDATE CASCADE ON DELETE CASCADE;
-Query OK, 0 rows affected (0.78 sec)
-Records: 0  Duplicates: 0  Warnings: 0
-
 mysql> CREATE TABLE Articles
     -> (
     -> `ID` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
