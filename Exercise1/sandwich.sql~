@@ -33,15 +33,15 @@ mysql> SELECT * FROM tastes;
 
 --------------------------------
 
-mysql> CREATE TABLE locations
+mysql> CREATE TABLE LOCATIONS
     -> (
-    ->     `lname` VARCHAR(20) NOT NULL,
-    ->     `phone` VARCHAR(8) NOT NULL,
-    ->     `address` TEXT NOT NULL
+    ->     `LName` VARCHAR(20) NOT NULL,
+    ->     `Phone` VARCHAR(8) NOT NULL,
+    ->     `Address` TEXT NOT NULL
     -> );
 Query OK, 0 rows affected (0.31 sec)
 
-mysql> INSERT INTO locations
+mysql> INSERT INTO LOCATIONS
     -> VALUES ('Lincoln', '682 4523', 'Lincoln Place'),
     ->     ('O\'Neills\'s', '674 2134', 'Pearse St'),
     ->     ('Old Nag', '767 8132', 'Dame St'),
@@ -49,8 +49,8 @@ mysql> INSERT INTO locations
 Query OK, 4 rows affected (0.10 sec)
 Records: 4  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM locations;                                                                                                        +------------+----------+---------------+
-| lname      | phone    | address       |
+mysql> SELECT * FROM LOCATIONS;                                                                                                        +------------+----------+---------------+
+| LName      | Phone    | Address       |
 +------------+----------+---------------+
 | Lincoln    | 682 4523 | Lincoln Place |
 | O'Neills's | 674 2134 | Pearse St     |
@@ -60,16 +60,16 @@ mysql> SELECT * FROM locations;                                                 
 4 rows in set (0.00 sec)
 
 ---------------------------------------
-mysql> CREATE TABLE sandwiches
+mysql> CREATE TABLE SANDWICHES
     -> (
-    ->     `location` VARCHAR(20) NOT NULL,
-    ->     `bread` VARCHAR(10) NOT NULL,
-    ->     `filling` VARCHAR(10) NOT NULL,
-    ->     `price` FLOAT(3,2) NOT NULL
+    ->     `Location` VARCHAR(20) NOT NULL,
+    ->     `Bread` VARCHAR(10) NOT NULL,
+    ->     `Filling` VARCHAR(10) NOT NULL,
+    ->     `Price` FLOAT(3,2) NOT NULL
     -> );
 Query OK, 0 rows affected (0.48 sec)
 
-mysql> INSERT INTO sandwiches
+mysql> INSERT INTO SANDWICHES
     -> VALUES ('Lincoln', 'Rye', 'Ham', 1.25),
     ->     ('O\'Neills\'s', 'White', 'Cheese', 1.20),
     ->     ('O\'Neills\'s', 'Whole', 'Ham', 1.25),
@@ -83,9 +83,9 @@ mysql> INSERT INTO sandwiches
 Query OK, 10 rows affected (0.46 sec)
 Records: 10  Duplicates: 0  Warnings: 0
 
-mysql> SELECT * FROM sandwiches;
+mysql> SELECT * FROM SANDWICHES;
 +------------+-------+---------+-------+
-| location   | bread | filling | price |
+| Location   | Bread | Filling | Price |
 +------------+-------+---------+-------+
 | Lincoln    | Rye   | Ham     |  1.25 |
 | O'Neills's | White | Cheese  |  1.20 |
@@ -103,15 +103,15 @@ mysql> SELECT * FROM sandwiches;
 ---------------------------
 1. Places where Jones can eat (using subquery)
 -------
-mysql> SELECT location 
-    -> FROM sandwiches
-    -> WHERE filling IN
-    ->    ( SELECT filling
-    ->      FROM tastes
-    ->      WHERE name = 'Jones'
+mysql> SELECT Location 
+    -> FROM SANDWICHES
+    -> WHERE Filling IN
+    ->    ( SELECT Filling
+    ->      FROM TASTES
+    ->      WHERE Name = 'Jones'
     ->    );
 +------------+
-| location   |
+| Location   |
 +------------+
 | O'Neills's |
 | Buttery    |
@@ -120,12 +120,12 @@ mysql> SELECT location
 --------------------------
 2. Places where Jones can eat (without using subquery)
 --------
-mysql> SELECT location 
-    -> FROM sandwiches AS s, tastes AS t
-    -> WHERE s.filling = t.filling
-    ->     AND t.name = 'Jones';
+mysql> SELECT Location 
+    -> FROM SANDWICHES AS s, TASTES AS t
+    -> WHERE s.Filling = t.Filling
+    ->     AND t.Name = 'Jones';
 +------------+
-| location   |
+| Location   |
 +------------+
 | O'Neills's |
 | Buttery    |
@@ -133,12 +133,12 @@ mysql> SELECT location
 2 rows in set (0.00 sec)
 ----------------------------------
 3. For each location, number of people who can eat there.
-mysql> SELECT location, COUNT(DISTINCT name)
-    -> FROM sandwiches AS s, tastes AS t
-    -> WHERE s.filling = t.filling
-    -> GROUP BY location;
+mysql> SELECT Location, COUNT(DISTINCT Name)
+    -> FROM SANDWICHES AS s, TASTES AS t
+    -> WHERE s.Filling = t.Filling
+    -> GROUP BY Location;
 +------------+----------------------+
-| location   | COUNT(DISTINCT name) |
+| Location   | COUNT(DISTINCT Name) |
 +------------+----------------------+
 | Buttery    |                    3 |
 | Lincoln    |                    2 |

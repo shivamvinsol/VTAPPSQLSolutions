@@ -8,8 +8,8 @@ Query OK, 0 rows affected (0.37 sec)
 
 mysql> INSERT INTO branch
     -> VALUES ('B1', 'John Smith', '2 Anglesea Rd'),
-    ->        ('B2', 'Mary Jones', '34 Pearse St'),
-    ->        ('B3', 'Francis Owens', 'Grange X');
+    ->      ('B2', 'Mary Jones', '34 Pearse St'),
+    ->      ('B3', 'Francis Owens', 'Grange X');
 Query OK, 3 rows affected (0.36 sec)
 Records: 3  Duplicates: 0  Warnings: 0
 
@@ -34,10 +34,10 @@ Query OK, 0 rows affected (0.41 sec)
 
 mysql> INSERT INTO titles
     -> VALUES ('Susannah', 'Ann Brown', 'Macmillan'),
-    ->        ('How to Fish', 'Amy Fly', 'Stop Press'),
-    ->        ('A History Of Dublin', 'David Little', 'Wiley'),
-    ->        ('Computers', 'Blaise Pascal', 'Applewoods'),
-    ->        ('The Wife', 'Ann Brown', 'Macmillan');
+    ->    ('How to Fish', 'Amy Fly', 'Stop Press'),
+    ->    ('A History Of Dublin', 'David Little', 'Wiley'),
+    ->    ('Computers', 'Blaise Pascal', 'Applewoods'),
+    ->    ('The Wife', 'Ann Brown', 'Macmillan');
 Query OK, 5 rows affected (0.10 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
@@ -64,15 +64,15 @@ Query OK, 0 rows affected (0.44 sec)
 
 mysql> INSERT INTO holdings
     -> VALUES ('B1', 'Susannah', 3),
-    ->        ('B1', 'How to Fish', 2),
-    ->        ('B1', 'A History Of Dublin', 1);
-    ->        ('B2', 'How to Fish', 4),
-    ->        ('B2', 'Computers', 2),
-    ->        ('B2', 'The Wife', 3);
-    ->        ('B3', 'A History Of Dublin', 1),
-    ->        ('B3', 'Computers', 4),
-    ->        ('B3', 'Susannah', 3),
-    ->        ('B3', 'The Wife', 1);
+    ->     ('B1', 'How to Fish', 2),
+    ->     ('B1', 'A History Of Dublin', 1);
+    ->     ('B2', 'How to Fish', 4),
+    ->     ('B2', 'Computers', 2),
+    ->     ('B2', 'The Wife', 3);
+    ->     ('B3', 'A History Of Dublin', 1),
+    ->     ('B3', 'Computers', 4),
+    ->     ('B3', 'Susannah', 3),
+    ->     ('B3', 'The Wife', 1);
 Query OK, 10 rows affected (0.10 sec)
 Records: 10  Duplicates: 0  Warnings: 0
 
