@@ -254,6 +254,7 @@ mysql> SELECT Articles.*
 |  7 | Floods | Floods in USA        |           1 |       3 |
 +----+--------+----------------------+-------------+---------+
 2 rows in set (0.00 sec)
+
 ===================================================
 
 Q3. For all the articles being selected above, select all the articles and also the comments associated with those articles in a single query (Do this using subquery also)
@@ -263,6 +264,29 @@ mysql> SELECT Articles.*, GROUP_CONCAT(COMMENT) AS Comments
     -> WHERE Articles.USER_ID = Users.ID
     -> AND Articles.ID = Comments.ARTICLE_ID
     -> AND Users.NAME = 'User3'
+    -> GROUP BY ID;
++----+--------+----------------------+-------------+---------+---------------+
+| ID | TITLE  | CONTENT              | CATEGORY_ID | USER_ID | Comments      |
++----+--------+----------------------+-------------+---------+---------------+
+|  6 | Virat  | Kohli scores Century |           2 |       3 | Wow,Wonderful |
+|  7 | Floods | Floods in USA        |           1 |       3 | SAD           |
++----+--------+----------------------+-------------+---------+---------------+
+2 rows in set (0.00 sec)
+
+subquery-
+mysql> SELECT Articles.*, GROUP_CONCAT(Comments.COMMENT) as Comments
+    -> FROM Articles, Comments
+    -> WHERE Articles.USER_ID = (
+    ->     SELECT @user_id:= ID
+    ->     FROM Users 
+    ->     WHERE NAME = 'User3'
+    ->     )
+    -> AND  Comments.ARTICLE_ID IN (
+    ->     SELECT ID 
+    ->     FROM Articles
+    ->     WHERE USER_ID = @user_id 
+    ->     )
+    -> AND Articles.ID = Comments.ARTICLE_ID
     -> GROUP BY ID;
 +----+--------+----------------------+-------------+---------+---------------+
 | ID | TITLE  | CONTENT              | CATEGORY_ID | USER_ID | Comments      |
