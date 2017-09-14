@@ -258,19 +258,20 @@ mysql> SELECT Articles.*
 
 Q3. For all the articles being selected above, select all the articles and also the comments associated with those articles in a single query (Do this using subquery also)
 Answer
-mysql> SELECT Articles.*, COMMENT
+mysql> SELECT Articles.*, GROUP_CONCAT(COMMENT) AS Comments
     -> FROM Articles, Comments, Users
     -> WHERE Articles.USER_ID = Users.ID
-    ->     AND Articles.ID = Comments.ARTICLE_ID
-    ->     AND Users.NAME = 'User3';
-+----+--------+----------------------+-------------+---------+-----------+
-| ID | TITLE  | CONTENT              | CATEGORY_ID | USER_ID | COMMENT   |
-+----+--------+----------------------+-------------+---------+-----------+
-|  6 | Virat  | Kohli scores Century |           2 |       3 | Wow       |
-|  6 | Virat  | Kohli scores Century |           2 |       3 | Wonderful |
-|  7 | Floods | Floods in USA        |           1 |       3 | SAD       |
-+----+--------+----------------------+-------------+---------+-----------+
-3 rows in set (0.00 sec)
+    -> AND Articles.ID = Comments.ARTICLE_ID
+    -> AND Users.NAME = 'User3'
+    -> GROUP BY ID;
++----+--------+----------------------+-------------+---------+---------------+
+| ID | TITLE  | CONTENT              | CATEGORY_ID | USER_ID | Comments      |
++----+--------+----------------------+-------------+---------+---------------+
+|  6 | Virat  | Kohli scores Century |           2 |       3 | Wow,Wonderful |
+|  7 | Floods | Floods in USA        |           1 |       3 | SAD           |
++----+--------+----------------------+-------------+---------+---------------+
+2 rows in set (0.00 sec)
+
 ======================
 
 Q4. Write a query to select all articles which do not have any comments (Do using subquery also)
@@ -305,11 +306,11 @@ mysql> SELECT *
 
 Q5. Write a query to select article which has maximum comments
 
-mysql> SELECT Articles.*, COUNT(Comments.ARTICLE_ID) as comments
+mysql> SELECT Articles.*, COUNT(Comments.ARTICLE_ID) AS comments
     -> FROM Articles, Comments
     -> WHERE Articles.ID = Comments.ARTICLE_ID
     -> GROUP BY Comments.ARTICLE_ID
-    -> ORDER BY comment DESC
+    -> ORDER BY comments DESC
     -> LIMIT 1;
 +----+-------------+----------------------------+-------------+---------+----------+
 | ID | TITLE       | CONTENT                    | CATEGORY_ID | USER_ID | comments |
