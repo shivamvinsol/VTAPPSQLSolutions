@@ -28,9 +28,9 @@ CREATE TABLE `solutions` (
   `task_id` int(10) unsigned NOT NULL,
   `reviewer_id` int(10) unsigned NOT NULL,
   `url` varchar(200) NOT NULL,
-  `status` enum('accepted','rejected') DEFAULT NULL,
-  `submitted_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `reviewed_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` enum('accepted','reviewed') NOT NULL,
+  `submitted_at` datetime NOT NULL,
+  `reviewed_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `task_id` (`task_id`),
   KEY `user_id` (`user_id`),
@@ -61,8 +61,8 @@ CREATE TABLE `task_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `task_id` int(10) unsigned NOT NULL,
-  `started_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `finished_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `started_at` datetime NOT NULL,
+  `finished_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `task_id` (`task_id`),
@@ -91,7 +91,7 @@ CREATE TABLE `tasks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `track_id` int(10) unsigned NOT NULL,
   `order_number` int(10) unsigned NOT NULL,
-  `is_exercise` enum('yes','no') DEFAULT NULL,
+  `is_exercise` enum('yes','no') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `track_id` (`track_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`)
@@ -118,7 +118,7 @@ CREATE TABLE `track_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
   `track_id` int(10) unsigned NOT NULL,
-  `role` enum('owner','reviewer','runner') DEFAULT NULL,
+  `role` enum('owner','reviewer','runner') NOT NULL,
   PRIMARY KEY (`id`),
   KEY `track_id` (`track_id`),
   KEY `user_id` (`user_id`),
@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `isAdmin` enum('yes','no') DEFAULT NULL,
+  `is_admin` enum('yes','no') NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-25 17:05:12
+-- Dump completed on 2017-09-27 11:02:28
