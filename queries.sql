@@ -28,7 +28,7 @@ CREATE TABLE `solutions` (
   `task_id` int(10) unsigned NOT NULL,
   `reviewer_id` int(10) unsigned NOT NULL,
   `url` varchar(200) NOT NULL,
-  `status` enum('accepted','reviewed') NOT NULL,
+  `status` enum('accepted','rejected') NOT NULL,
   `submitted_at` datetime NOT NULL,
   `reviewed_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -91,7 +91,7 @@ CREATE TABLE `tasks` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `track_id` int(10) unsigned NOT NULL,
   `order_number` int(10) unsigned NOT NULL,
-  `is_exercise` enum('yes','no') NOT NULL,
+  `is_exercise` bit(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `track_id` (`track_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`track_id`) REFERENCES `tracks` (`id`)
@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
-  `is_admin` enum('yes','no') NOT NULL,
+  `is_admin` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -192,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-27 11:02:28
+-- Dump completed on 2017-09-28 14:00:12
