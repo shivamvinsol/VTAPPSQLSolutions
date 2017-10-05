@@ -114,10 +114,3 @@ mysql> SELECT SUM(parent1_perc/100) AS 'amount'
 +--------+
 1 row in set (0.00 sec)
 
-+--------+
-| amount |
-+--------+
-| 1.6000 |
-+--------+
-1 row in set (0.00 sec)
-
