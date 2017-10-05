@@ -103,9 +103,17 @@ mysql> SELECT CONCAT(parent1_id, ' & ',  parent2_id) AS 'parent colors', mix_id,
 --------
 5. calculate the total amount of color 'Red'(in kgs) needed to make a 1kg mix each for its possible mixtures(yellow,pink..)
 
-mysql> SELECT SUM(parent1_perc/100)  AS 'amount'
-       FROM mixtures
-       WHERE parent1_id = 10;
+mysql> SELECT SUM(parent1_perc/100) AS 'amount'
+       FROM mixtures, colors
+       WHERE parent1_id = colors.id
+       AND colors.name = 'Red';
++--------+
+| amount |
++--------+
+| 1.6000 |
++--------+
+1 row in set (0.00 sec)
+
 +--------+
 | amount |
 +--------+
