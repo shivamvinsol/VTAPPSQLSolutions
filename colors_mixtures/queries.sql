@@ -37,12 +37,11 @@ Records: 4  Duplicates: 0  Warnings: 0
 ------------------------------
 1. Find the colors that can be clubbed with 'Red' and also name the resulting color
 
-mysql> SELECT b.name AS 'combine with', c.name AS 'resulting color'
+mysql> SELECT b.name as 'combine with', c.name as 'resulting color'
        FROM colors a, mixtures m, colors b, colors c
-       WHERE parent1_id = a.id
-       AND a.name = 'Red'
-       AND b.id = parent2_id
-       AND c.id = mix_id;
+       WHERE ((a.id = parent1_id AND b.id = parent2_id AND c.id = mix_id)
+       OR (b.id = parent1_id  AND a.id = parent2_id AND c.id = mix_id))
+       AND a.name = 'Red';
 +--------------+-----------------+
 | combine with | resulting color |
 +--------------+-----------------+
@@ -50,7 +49,7 @@ mysql> SELECT b.name AS 'combine with', c.name AS 'resulting color'
 | Blue         | Pink            |
 | Yellow       | White           |
 +--------------+-----------------+
-3 rows in set (0.01 sec)
+3 rows in set (0.00 sec)
 
 ---------------------
 2. Find mixtures that can be formed without 'Red'
@@ -103,10 +102,18 @@ mysql> SELECT CONCAT(parent1_id, ' & ',  parent2_id) AS 'parent colors', mix_id,
 --------
 5. calculate the total amount of color 'Red'(in kgs) needed to make a 1kg mix each for its possible mixtures(yellow,pink..)
 
-mysql> SELECT SUM(parent1_perc/100) AS 'amount'
-       FROM mixtures, colors
-       WHERE parent1_id = colors.id
-       AND colors.name = 'Red';
+mysql> SELECT
+           (SELECT COALESCE(SUM(parent1_perc/100), 0)
+            FROM colors, mixtures
+            WHERE colors.name = 'Red'
+            AND parent1_id = colors.id
+           ) +
+           (SELECT COALESCE(SUM(parent2_perc/100), 0)
+            FROM colors, mixtures
+            WHERE colors.name = 'Red'
+            AND parent2_id = colors.id
+           )
+      AS 'amount';
 +--------+
 | amount |
 +--------+
